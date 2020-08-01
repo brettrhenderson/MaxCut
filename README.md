@@ -1,5 +1,5 @@
 # MaxCut
-An solution of the Maximum Cut problem on a DWave quantum annealer.
+A solution of the Maximum Cut problem on a DWave quantum annealer.
 
 One possible statement of the Max Cut problem would be: "Given an undirected graph, 
 partition the vertices into two sets such that the number of edges joining 
