@@ -13,7 +13,8 @@ import dwave.inspector as inspector
 # Since we're working with un-directed graphs, we can represent a graph as a set of edges,
 # which are just tuples of connected nodes. To start out, we implement the graph from the
 # lecture slides. Be sure not to double-count edges.
-graph = {('A', 'B'), ('B', 'C'), ('B', 'D'), ('C', 'F'), ('C', 'D'), ('D', 'F'), ('D', 'E'), ('E', 'F')}
+# graph = {('A', 'B'), ('B', 'C'), ('B', 'D'), ('C', 'F'), ('C', 'D'), ('D', 'F'), ('D', 'E'), ('E', 'F')}
+graph = {('A', 'B'), ('A', 'C'), ('B', 'C'), ('B', 'D'), ('B', 'E'), ('C', 'D')}
 
 # We assign variables x_i for each vertex, where the meaning is that x_i = 0 means the vertext is assigned to
 # set A and x_i = 1 means it is assigned to set B. From my derivation, the contribution of each edge between
@@ -32,8 +33,9 @@ for edge in graph:
 # 3. Instantiate a solver
 solver = EmbeddingComposite(DWaveSampler(solver={'qpu': True}))
 
-# 4. Solve the problem
-sampleset = solver.sample_qubo(Q, chain_strength=200,  num_reads=100)
+# 4. Solve the problem - we set the chain strength to be about the same as the maximum
+# bias magnitude in our objective. 
+sampleset = solver.sample_qubo(Q, chain_strength=5, num_reads=100)
 
 # 5. Interpret results
 inspector.show(sampleset)
